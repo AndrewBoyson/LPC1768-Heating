@@ -19,8 +19,8 @@ GCFLAGS += -mcpu=cortex-m3
 GCFLAGS += -mthumb
 GCFLAGS += -Wall
 GCFLAGS += -Wno-misleading-indentation
-GCFLAGS += -Wno-unused-function
-GCFLAGS += -Wno-unused-variable
+#GCFLAGS += -Wno-unused-function
+#GCFLAGS += -Wno-unused-variable
 GCFLAGS += -Werror
 GCFLAGS += -I.
 GCFLAGS += -I../shared 
