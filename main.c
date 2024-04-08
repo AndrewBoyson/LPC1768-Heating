@@ -12,7 +12,6 @@
 #include "settings/settings.h"
 #include "web/web.h"
 #include "heating/values.h"
-#include "crypto/crypto.h"
 #include "wiz/wiz/wiz.h"
 #include "lpc1768/debug.h"
 
@@ -25,7 +24,6 @@ int main()
                 ClkInit();
                 LogInit(ClkNowTmUtc, 0);
     if (   SettingsInit()) goto end; //Uses log. Fram is initialised here
-             CryptoInit();           //Uses log
                 NetInit();
                 WebInit();
             OneWireInit();
@@ -45,7 +43,6 @@ int main()
         if ( DeviceMain()) break;
             HeatingMain();
             Lpc1768Main();
-             CryptoMain();
                 WizMain();
     }
 
