@@ -14,6 +14,7 @@
 #include "heating/values.h"
 #include "wiz/wiz/wiz.h"
 #include "lpc1768/debug.h"
+#include "net-this/net-this-leds.h"
 
 int main()
 {
@@ -24,7 +25,7 @@ int main()
                 ClkInit();
                 LogInit(ClkNowTmUtc, 0);
     if (   SettingsInit()) goto end; //Uses log. Fram is initialised here
-                NetInit();
+                NetInit("Heating", NetThisLinkLed, NetThisSpeedLed, false);
                 WebInit();
             OneWireInit();
              DeviceInit();

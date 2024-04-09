@@ -8,7 +8,7 @@ OFILES += $(patsubst %.s,%.o,$(SFILES))
 
 PROJECT=heating
 
-LSCRIPT=link.ld
+LSCRIPT=../shared/lpc1768/link.ld
 
 OPTIMIZATION=2
 
