@@ -10,6 +10,8 @@ PROJECT=heating
 
 LSCRIPT=../shared/lpc1768/link.ld
 
+BUILDDATE := $(shell date '+%Y%m%d')
+
 OPTIMIZATION=2
 
 ASFLAGS += -mcpu=cortex-m3
@@ -19,8 +21,6 @@ GCFLAGS += -mcpu=cortex-m3
 GCFLAGS += -mthumb
 GCFLAGS += -Wall
 GCFLAGS += -Wno-misleading-indentation
-#GCFLAGS += -Wno-unused-function
-#GCFLAGS += -Wno-unused-variable
 GCFLAGS += -Werror
 GCFLAGS += -I.
 GCFLAGS += -I../shared 
@@ -30,7 +30,7 @@ LDFLAGS += -mcpu=cortex-m3
 LDFLAGS += -mthumb
 LDFLAGS += -O$(OPTIMIZATION)
 LDFLAGS += -nostartfiles
-LDFLAGS += -Wl,-Map=$(PROJECT).map
+LDFLAGS += -Wl,-Map=$(PROJECT).map,--defsym,BuildDate=$(BUILDDATE)
 LDFLAGS += -T$(LSCRIPT)
 
 GCC     = arm-none-eabi-gcc
@@ -50,26 +50,29 @@ $(PROJECT).bin: $(PROJECT).elf
 
 $(PROJECT).elf: $(OFILES)
 	@echo $(OFILES) > ofiles
-#	$(GCC) $(LDFLAGS) $(OFILES) -o $(PROJECT).elf
 	$(GCC) $(LDFLAGS) -Wl,@ofiles -o $(PROJECT).elf
 
 %.o : %.c
-	$(GCC) $(GCFLAGS) -c -o $@ $<
+	$(GCC) -MMD -MP $(GCFLAGS) -c -o $@ $<
 
 %.o : %.s
 	$(AS) $(ASFLAGS) -o $@ $<
+
+-include $(DFILES) #the '-' prevents a non existant file giving an error
 
 stats: $(PROJECT).elf
 	$(SIZE) $(PROJECT).elf
 
 clean:
 	$(REMOVE) $(OFILES)
+	$(REMOVE) $(DFILES)
 	$(REMOVE) $(PROJECT).hex
 	$(REMOVE) $(PROJECT).elf
 	$(REMOVE) $(PROJECT).map
 	$(REMOVE) $(PROJECT).bin
 	$(REMOVE) $(PROJECT).dis
 	$(REMOVE) *.lst
+	$(REMOVE) ofiles
 
 dis:
 	$(DIS) $(PROJECT).elf > $(PROJECT).dis
@@ -88,3 +91,7 @@ sfiles:
 	
 cfiles:
 	@echo $(CFILES)
+
+date:
+	@echo $(BUILDDATE)
+	
