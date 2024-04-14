@@ -14,9 +14,6 @@
 #include "heating/values.h"
 #include "wiz/wiz/wiz.h"
 #include "lpc1768/debug.h"
-#include "net-this/net-this-leds.h"
-#include "web-this/web-server-this.h"
-#include "web-this/web-nav-this.h"
 
 int main()
 {
@@ -27,13 +24,7 @@ int main()
                 ClkInit();
                 LogInit(ClkNowTmUtc, 0);
     if (   SettingsInit()) goto end; //Uses log. Fram is initialised here
-                NetInit("Heating", NetThisLinkLed, NetThisSpeedLed, false);
-				
-				WebHookDecideWhatToDo = WebServerThisDecideWhatToDo;
-				WebHookHandleQuery    = WebServerThisHandleQuery;
-				WebHookPost           = WebServerThisPost;
-				WebHookReply          = WebServerThisReply;
-				WebHookAddNav         = WebNavThis;
+				NetInit("Heating");
                 WebInit("Heating");
             OneWireInit();
              DeviceInit();
