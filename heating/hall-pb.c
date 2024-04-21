@@ -10,8 +10,8 @@
 #define HALL_PB_PIN FIO0PIN(05) // P0.05 == p29;
 
 #define        DEBOUNCE_MS    20
-#define      LONG_PRESS_MS  2000
-#define INACTIVE_REVERT_MS 30000
+#define      LONG_PRESS_MS  1000
+#define INACTIVE_REVERT_MS 10000
 
 static int ms  = 0;
 
