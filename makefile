@@ -1,23 +1,27 @@
 
-CFILES += $(wildcard ../shared/*.c ../shared/*/*.c ../shared/*/*/*.c ../shared/*/*/*/*.c ../shared/*/*/*/*/*.c ../shared/*/*/*/*/*/*.c)
+PROJECT := heating
+UNUSED  :=
+
+CFILES := $(wildcard ../shared/*.c ../shared/*/*.c ../shared/*/*/*.c ../shared/*/*/*/*.c ../shared/*/*/*/*/*.c ../shared/*/*/*/*/*/*.c)
 CFILES += $(wildcard *.c */*.c */*/*.c)
-SFILES += $(wildcard ../shared/*.s ../shared/*/*.s ../shared/*/*/*.s ../shared/*/*/*/*.s ../shared/*/*/*/*/*.s ../shared/*/*/*/*/*/*.s)
+SFILES := $(wildcard ../shared/*.s ../shared/*/*.s ../shared/*/*/*.s ../shared/*/*/*/*.s ../shared/*/*/*/*/*.s ../shared/*/*/*/*/*/*.s)
 SFILES += $(wildcard *.s */*.s */*/*.s)
-OFILES += $(patsubst %.c,%.o,$(CFILES))
+OFILES := $(patsubst %.c,%.o,$(CFILES))
 OFILES += $(patsubst %.s,%.o,$(SFILES))
+OFILES := $(filter-out $(UNUSED), $(OFILES))
+DFILES := $(OFILES:%.o=%.d)
 
-PROJECT=heating
 
-LSCRIPT=../shared/lpc1768/link.ld
+LSCRIPT := ../shared/lpc1768/link.ld
 
 BUILDDATE := $(shell date '+%Y%m%d')
 
-OPTIMIZATION=2
+OPTIMIZATION := 2
 
-ASFLAGS += -mcpu=cortex-m3
+ASFLAGS := -mcpu=cortex-m3
 ASFLAGS += -mimplicit-it=thumb
 
-GCFLAGS += -mcpu=cortex-m3
+GCFLAGS := -mcpu=cortex-m3
 GCFLAGS += -mthumb
 GCFLAGS += -Wall
 GCFLAGS += -Wno-misleading-indentation
@@ -26,22 +30,24 @@ GCFLAGS += -I.
 GCFLAGS += -I../shared 
 GCFLAGS += -O$(OPTIMIZATION)
 
-LDFLAGS += -mcpu=cortex-m3
+LDFLAGS := -mcpu=cortex-m3
 LDFLAGS += -mthumb
 LDFLAGS += -O$(OPTIMIZATION)
 LDFLAGS += -nostartfiles
 LDFLAGS += -Wl,-Map=$(PROJECT).map,--defsym,BuildDate=$(BUILDDATE)
 LDFLAGS += -T$(LSCRIPT)
 
-GCC     = arm-none-eabi-gcc
-AS      = arm-none-eabi-as
-LD      = arm-none-eabi-ld
-OBJCOPY = arm-none-eabi-objcopy
-SIZE    = arm-none-eabi-size
-DIS     = arm-none-eabi-objdump -dS
-MAP     = arm-none-eabi-objdump -h
-REMOVE  = rm -f
-COPY    = cp -f
+GCC     := arm-none-eabi-gcc
+AS      := arm-none-eabi-as
+LD      := arm-none-eabi-ld
+OBJCOPY := arm-none-eabi-objcopy
+SIZE    := arm-none-eabi-size
+DIS     := arm-none-eabi-objdump -dS
+MAP     := arm-none-eabi-objdump -h
+REMOVE  := rm -f
+COPY    := cp -f
+
+.PHONY: all stats clean dis map copy wd sfiles cfiles date
 
 all: $(PROJECT).bin
 
