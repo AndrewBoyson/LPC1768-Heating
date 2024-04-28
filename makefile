@@ -11,7 +11,6 @@ OFILES += $(patsubst %.s,%.o,$(SFILES))
 OFILES := $(filter-out $(UNUSED), $(OFILES))
 DFILES := $(OFILES:%.o=%.d)
 
-
 LSCRIPT := ../shared/lpc1768/link.ld
 
 BUILDDATE := $(shell date '+%Y%m%d')
