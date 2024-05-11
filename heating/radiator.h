@@ -16,5 +16,5 @@ extern int      RadiatorGetHotWaterProtectTemp (void); extern void RadiatorSetHo
 extern bool  RadiatorsOn;
 extern bool  RadiatorPump;
 
-extern int   RadiatorInit(void);
+extern void  RadiatorInit(void);
 extern void  RadiatorMain(void);

@@ -28,7 +28,7 @@ extern bool BoilerCallEnable;
 extern bool BoilerCall;
 extern bool BoilerPump;
 
-extern int  BoilerInit(void);
+extern void BoilerInit(void);
 extern void BoilerMain(void);
 
 

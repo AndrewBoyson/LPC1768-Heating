@@ -12,14 +12,8 @@ uint16_t HotWaterGetDS18B20Value(){ return DS18B20ValueFromRom(hotWaterRom); }
 
 static void setHotWaterRom(char* value) { memcpy(hotWaterRom,  value, 8); SetHotWaterRom(hotWaterRom); }
 
-int HotWaterInit()
+void HotWaterInit()
 {
-    hotWaterRom = DS18B20Roms + 8 * DS18B20RomCount;
-    DS18B20RomSetters[DS18B20RomCount] = setHotWaterRom;
-    DS18B20RomNames[DS18B20RomCount] = "HotWater";
-    DS18B20RomCount++;
-    
+	hotWaterRom = DS18B20AddRom(setHotWaterRom, "HotWater");
     GetHotWaterRom(hotWaterRom);
-    
-    return 0;
 }

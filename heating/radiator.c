@@ -134,12 +134,9 @@ void RadiatorChgWinter  (){ RadiatorSetWinter  (!RadiatorGetWinter  ()); }
 void RadiatorChgOverride(){ RadiatorSetOverride(!RadiatorGetOverride()); }
 void RadiatorChgHotWaterProtectOn  ()       {                             hotWaterProtectOn   = !hotWaterProtectOn; SetHotWaterProtectOn  (&hotWaterProtectOn  ); }
 void RadiatorSetHotWaterProtectTemp( int v) { if (v > 99 || v < 0) v = 0; hotWaterProtectTemp = (int8_t)v;          SetHotWaterProtectTemp(&hotWaterProtectTemp); }
-int RadiatorInit()
+void RadiatorInit()
 {
-    hallRom = DS18B20Roms + 8 * DS18B20RomCount;
-    DS18B20RomSetters[DS18B20RomCount] = setHallRom;
-    DS18B20RomNames[DS18B20RomCount] = "Hall";
-    DS18B20RomCount++;
+	hallRom = DS18B20AddRom(setHallRom, "Hall");
 
     GetRadiatorWinter      (&htgWinter           );
     GetHallRom             ( hallRom             );
@@ -151,8 +148,6 @@ int RadiatorInit()
     GetHotWaterProtectTemp (&hotWaterProtectTemp );
     
     RADIATOR_PUMP_DIR = 1; //Set the direction to 1 == output
-    
-    return 0;
 }
 void RadiatorMain()
 {

@@ -101,22 +101,11 @@ static int calculateDeltaTFromSpeed(int speed)
     return deltaT16ths;
 }
 
-int BoilerInit()
+void BoilerInit()
 {
-      tankRom = DS18B20Roms + 8 * DS18B20RomCount;
-    DS18B20RomSetters[DS18B20RomCount] = setTankRom;
-    DS18B20RomNames[DS18B20RomCount] = "Tank";
-    DS18B20RomCount++;
-    
-    outputRom = DS18B20Roms + 8 * DS18B20RomCount;
-    DS18B20RomSetters[DS18B20RomCount] = setOutputRom;
-    DS18B20RomNames[DS18B20RomCount] = "BlrOut";
-    DS18B20RomCount++;
-    
-    returnRom = DS18B20Roms + 8 * DS18B20RomCount;
-    DS18B20RomSetters[DS18B20RomCount] = setReturnRom;
-    DS18B20RomNames[DS18B20RomCount] = "BlrRtn";
-    DS18B20RomCount++;
+	  tankRom = DS18B20AddRom(setTankRom  , "Tank"  );
+	outputRom = DS18B20AddRom(setOutputRom, "BlrOut");
+	returnRom = DS18B20AddRom(setReturnRom, "BlrRtn");
     
     GetTankRom               (   tankRom            );
     GetOutputRom             ( outputRom            );
@@ -137,8 +126,6 @@ int BoilerInit()
     BOILER_CALL_DIR = 1; //Set the direction to 1 == output
 
     PwmInit(400, 100);
-
-    return 0;
 }
 bool BoilerCallEnable = true;
 bool BoilerCall = false;
