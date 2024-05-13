@@ -4,9 +4,7 @@
 #include "web/http/http.h"
 #include "heating/boiler.h"
 #include "heating/radiator.h"
-#include "1-wire/1-wire/ds18b20.h"
 #include "heating/program.h"
-#include "1-wire/1-wire/1-wire-device.h"
 
 void WebProgramAjax()
 {

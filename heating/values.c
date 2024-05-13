@@ -8,7 +8,7 @@
 #include "clk/clktime.h"
 #include "clk/clktm.h"
 #include "lpc1768/mstimer/mstimer.h"
-#include "1-wire/1-wire/ds18b20.h"
+#include "1-wire/ds18b20.h"
 #include "radiator.h"
 #include "boiler.h"
 #include "hot-water.h"

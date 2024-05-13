@@ -15,12 +15,9 @@
 #define DO_SYSTEM_HTML     DO_THIS + 10
 #define DO_SYSTEM_AJAX     DO_THIS + 11
 #define DO_SYSTEM_SCRIPT   DO_THIS + 12
-#define DO_1WIRE_HTML      DO_THIS + 13
-#define DO_1WIRE_AJAX      DO_THIS + 14
-#define DO_1WIRE_SCRIPT    DO_THIS + 15
-#define DO_WIZ_HTML        DO_THIS + 16
-#define DO_WIZ_AJAX        DO_THIS + 17
-#define DO_WIZ_SCRIPT      DO_THIS + 18
+#define DO_WIZ_HTML        DO_THIS + 13
+#define DO_WIZ_AJAX        DO_THIS + 14
+#define DO_WIZ_SCRIPT      DO_THIS + 15
 
 int WebServerThisDecideWhatToDo(char *pPath, char* pLastModified)
 {
@@ -33,8 +30,6 @@ int WebServerThisDecideWhatToDo(char *pPath, char* pLastModified)
     if (HttpSameStr(pPath, "/boiler-ajax"  )) return DO_BOILER_AJAX;
     if (HttpSameStr(pPath, "/system"       )) return DO_SYSTEM_HTML;
     if (HttpSameStr(pPath, "/system-ajax"  )) return DO_SYSTEM_AJAX;
-    if (HttpSameStr(pPath, "/1wire"        )) return DO_1WIRE_HTML;
-    if (HttpSameStr(pPath, "/1wire-ajax"   )) return DO_1WIRE_AJAX;
     if (HttpSameStr(pPath, "/wiz"          )) return DO_WIZ_HTML;
     if (HttpSameStr(pPath, "/wiz-ajax"     )) return DO_WIZ_AJAX;
     
@@ -42,7 +37,6 @@ int WebServerThisDecideWhatToDo(char *pPath, char* pLastModified)
     if (HttpSameStr(pPath, "/radiator.js"  )) return HttpSameDate(WebRadiatorScriptDate, WebRadiatorScriptTime, pLastModified) ? DO_NOT_MODIFIED : DO_RADIATOR_SCRIPT;
     if (HttpSameStr(pPath, "/boiler.js"    )) return HttpSameDate(WebBoilerScriptDate,   WebBoilerScriptTime,   pLastModified) ? DO_NOT_MODIFIED : DO_BOILER_SCRIPT;
     if (HttpSameStr(pPath, "/system.js"    )) return HttpSameDate(WebSystemScriptDate,   WebSystemScriptTime,   pLastModified) ? DO_NOT_MODIFIED : DO_SYSTEM_SCRIPT;
-    if (HttpSameStr(pPath, "/1wire.js"     )) return HttpSameDate(WebOneWireScriptDate,  WebOneWireScriptTime,  pLastModified) ? DO_NOT_MODIFIED : DO_1WIRE_SCRIPT;
     if (HttpSameStr(pPath, "/wiz.js"       )) return HttpSameDate(WebWizScriptDate,      WebWizScriptTime,      pLastModified) ? DO_NOT_MODIFIED : DO_WIZ_SCRIPT;
 
     return DO_NOT_FOUND;
@@ -60,8 +54,6 @@ bool WebServerThisHandleQuery(int todo, char* pQuery)
         case DO_BOILER_AJAX:   WebBoilerQuery  (pQuery); return true;
         case DO_SYSTEM_HTML:   WebSystemQuery  (pQuery); return true;
         case DO_SYSTEM_AJAX:   WebSystemQuery  (pQuery); return true;
-        case DO_1WIRE_HTML:    WebOneWireQuery (pQuery); return true;
-        case DO_1WIRE_AJAX:    WebOneWireQuery (pQuery); return true;
         case DO_WIZ_HTML:      WebWizQuery     (pQuery); return true;
         case DO_WIZ_AJAX:      WebWizQuery     (pQuery); return true;
     }
@@ -88,9 +80,6 @@ bool WebServerThisReply(int todo)
         case DO_SYSTEM_HTML:     WebSystemHtml    (); return true;
         case DO_SYSTEM_AJAX:     WebSystemAjax    (); return true;
         case DO_SYSTEM_SCRIPT:   WebSystemScript  (); return true;
-        case DO_1WIRE_HTML:      WebOneWireHtml   (); return true;
-        case DO_1WIRE_AJAX:      WebOneWireAjax   (); return true;
-        case DO_1WIRE_SCRIPT:    WebOneWireScript (); return true;
         case DO_WIZ_HTML:        WebWizHtml       (); return true;
         case DO_WIZ_AJAX:        WebWizAjax       (); return true;
         case DO_WIZ_SCRIPT:      WebWizScript     (); return true;

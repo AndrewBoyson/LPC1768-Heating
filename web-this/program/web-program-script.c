@@ -5,7 +5,7 @@
 
 static const char* script =
 #include "web/common/web-ajax-class.inc"
-#include "1-wire/web/web-1wire-class.inc"
+#include "web/base/1-wire/web-1wire-class.inc"
 #include "web-program-script.inc"
 ;
 const char* WebProgramScriptDate = __DATE__;

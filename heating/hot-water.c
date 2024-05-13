@@ -3,7 +3,7 @@
 #include <stdbool.h>
 #include <stdint.h>
 
-#include "1-wire/1-wire/ds18b20.h"
+#include "1-wire/ds18b20.h"
 #include "settings/settings.h"
 
 static char* hotWaterRom;

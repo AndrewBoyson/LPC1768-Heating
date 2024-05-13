@@ -4,7 +4,7 @@
 
 #include "lpc1768/register.h"
 #include "program.h"
-#include "1-wire/1-wire/ds18b20.h"
+#include "1-wire/ds18b20.h"
 #include "settings/settings.h"
 #include "boiler.h"
 #include "radiator.h"
