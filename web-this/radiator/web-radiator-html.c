@@ -5,7 +5,7 @@
 void WebRadiatorHtml()
 {
     HttpOk("text/html; charset=UTF-8", "no-cache", NULL, NULL);
-    WebAddHeader("Radiator", "settings.css", "radiator.js");
+    WebAddHeader3("Radiator", "settings.css", "ajax-class.js", "1wire-class.js", "radiator.js");
     WebAddNav(RADIATOR_PAGE);
     WebAddH1("Radiator");
 

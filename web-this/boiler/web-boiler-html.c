@@ -5,7 +5,7 @@
 void WebBoilerHtml()
 {
     HttpOk("text/html; charset=UTF-8", "no-cache", NULL, NULL);
-    WebAddHeader("Boiler", "settings.css", "boiler.js");
+    WebAddHeader3("Boiler", "settings.css", "ajax-class.js", "1wire-class.js", "boiler.js");
     WebAddNav(BOILER_PAGE);
     WebAddH1("Boiler");
     

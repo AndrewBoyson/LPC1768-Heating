@@ -5,7 +5,7 @@
 void WebProgramHtml()
 {
     HttpOk("text/html; charset=UTF-8", "no-cache", NULL, NULL);
-    WebAddHeader("Program", "settings.css", "program.js");
+    WebAddHeader3("Program", "settings.css", "ajax-class.js", "1wire-class.js", "program.js");
     WebAddNav(PROGRAM_PAGE);
     WebAddH1("Program");
     WebAddH2("Output");

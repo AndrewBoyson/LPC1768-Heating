@@ -4,7 +4,7 @@
 void WebHomeHtml()
 {
     HttpOk("text/html; charset=UTF-8", "no-cache", NULL, NULL);
-    WebAddHeader("Home", NULL, "radiator.js");
+    WebAddHeader3("Home", NULL, "ajax-class.js", "1wire-class.js", "radiator.js");
     
     HttpAddText("<a href='/radiator' class='hamburger'>\r\n");
         HttpAddText("<div class='bar'  ></div>\r\n");
